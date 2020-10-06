@@ -17,7 +17,7 @@ class App extends React.Component {
     const { boards } = this.state
     return <div>
       {boards.map(board => {
-        return <Board key={board.id} id={board.id} title={board.title} createdBy={board.createdBy} createdName={board.createdName} />
+        return <Board key={board.id} id={board.id} title={board.title} createdName={board.createdName} createdAt={board.createdAt} />
       })}
     </div>
   }
