@@ -1,26 +1,25 @@
-import React from 'react'
-import axios from 'axios'
-import Board from './components/Board'
+import logo from './logo.svg';
+import './App.css';
 
-class App extends React.Component {
-  state = {
-    boards: []
-  }
-  getBoards = async () => {
-    const res = await axios.get(`http://localhost:8080/boards`)
-    this.setState({ boards: res.data })
-  }
-  componentDidMount() {
-    this.getBoards()
-  }
-  render() {
-    const { boards } = this.state
-    return <div>
-      {boards.map(board => {
-        return <Board key={board.id} id={board.id} title={board.title} createdName={board.createdName} createdAt={board.createdAt} />
-      })}
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
-  }
+  );
 }
 
 export default App;
