@@ -1,94 +1,76 @@
 import React, { useState } from 'react'
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Jumbotron, Card, Container, Row, Col } from 'react-bootstrap'
 import './App.css'
+import Data from './data.js'
 
 function App() {
-  let [boards, setBoards] = useState([{
-    title: '남자 코트 추천',
-    createdAt: '2월 17일 발행',
-    likeCount: 0
-  }, {
-    title: '강남 우동맛집',
-    createdAt: '2월 18일 발행',
-    likeCount: 0
-  }, {
-    title: '파이썬독학',
-    createdAt: '2월 19일 발행',
-    likeCount: 0
-  }])
-  let [clickedBoard, setClickedBoard] = useState({})
-  let [modal, setModal] = useState(false)
-
-  function clickBoard(index) {
-    setClickedBoard(boards[index])
-    if (!modal)
-      setModal(true)
-  }
-
-  function likeBoard(index) {
-    var newBoards = [...boards]
-    newBoards[index].likeCount++
-    setBoards(newBoards)
-  }
+  let [boards, setBoards] = useState(Data)
 
   return (
     <div className="App">
-      <div className="black-nav">
-        <div>나도 뭐할지 모르겠음</div>
-      </div>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#link">Link</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+        </Navbar.Collapse>
+      </Navbar>
+
+      <Jumbotron>
+        <h1>Hello, world!</h1>
+        <p>
+          This is a simple hero unit, a simple jumbotron-style component for calling
+          extra attention to featured content or information.
+        </p>
+        <p>
+          <Button variant="primary">Learn more</Button>
+        </p>
+      </Jumbotron>
+
+      <Boards boards={boards} />
+    </div>
+  )
+}
+
+function Boards(props) {
+  return <Container fluid>
+    <Row md={4}>
       {
-        boards.map((board, index) => {
-          return <div className="list" key={index} onClick={() => clickBoard(index)}>
-            <h4>{board.title} <span onClick={() => likeBoard(index)}>👍</span> {board.likeCount} </h4>
-            <p>{board.createdAt}</p>
-            <hr />
-          </div>
+        props.boards.map((board, index) => {
+          return <Board key={index} board={board} />
         })
       }
-      <Publish boards={boards} setBoards={setBoards} />
-      {
-        modal === true
-          ? <Modal board={clickedBoard} /> // child component
-          : null
-      }
-    </div>
-  )
+    </Row>
+  </Container>
 }
 
-function Publish(props) {
-  let [title, setTitle] = useState('')
-  
-  function inputTitle(chars) {
-    setTitle(chars)
-  }
-
-  function createBoard() {
-    if (!title) {
-      return;
-    }
-    var newBoards = [...props.boards]
-    newBoards.unshift({
-      title: title,
-      createdAt: '2월 20일 발행',
-      likeCount: 0
-    })
-    props.setBoards(newBoards)
-  }
-
-  return <div className="publish">
-    <input onChange={(e) => inputTitle(e.target.value)} />
-    <button onClick={() => createBoard()}>저장</button>
-  </div>
-}
-
-function Modal(props) {
+function Board(props) {
   let board = props.board
-  return (
-    <div className="modal">
-      <h2>{board.title}</h2>
-      <p>{board.createdAt}</p>
-      <p>{board.likeCount}</p>
-    </div>
-  )
+  return <Col xs={12} className="board">
+    <Card>
+      <Card.Body>
+        <Card.Title>{board.title}</Card.Title>
+        <Card.Text>{board.likeCount}</Card.Text>
+      </Card.Body>
+      <Card.Footer>
+        <small className="text-muted">{board.createdAt}</small>
+      </Card.Footer>
+    </Card>
+  </Col>
 }
 
 export default App
