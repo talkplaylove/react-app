@@ -2,13 +2,15 @@ import HomeMenu from '../components/home/HomeMenu'
 import HomeBanner from '../components/home/HomeBanner'
 import VideoContainer from '../components/video/VideoContainer'
 
-function Home() {
-  return <>
-    <HomeMenu />
-    <HomeBanner />
+function HomePage() {
+  return (
+    <>
+      <HomeMenu />
+      <HomeBanner />
 
-    <VideoContainer />
-  </>
+      <VideoContainer />
+    </>
+  )
 }
 
-export default Home
+export default HomePage

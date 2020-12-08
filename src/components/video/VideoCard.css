@@ -1,10 +1,16 @@
 .video {
-  margin-bottom: 2rem;
   padding: 0;
 }
 
 .card {
+  padding-bottom: 0.8rem;
+  height: 100%;
   border: 0;
+}
+
+.card:hover {
+  cursor: pointer;
+  background-color: #F2F2F2;
 }
 
 .card-body {
@@ -12,10 +18,11 @@
 }
 
 .title {
-  line-height: 1.4rem;
-  max-height: 2.8rem;
+  line-height: 1.1rem;
+  max-height: 2.2rem;
   font-size: 0.9rem;
   overflow: hidden;
+  margin-bottom: 0.2rem;
 }
 
 .meta {
