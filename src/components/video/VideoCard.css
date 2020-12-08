@@ -1,0 +1,23 @@
+.video {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.card {
+  border: 0;
+}
+
+.card-body {
+  padding: 0.5rem;
+}
+
+.title {
+  line-height: 1.4rem;
+  max-height: 2.8rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.meta {
+  font-size: 0.8rem;
+}
