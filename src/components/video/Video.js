@@ -8,7 +8,7 @@ function Video({ video }) {
       </div>
       <div className="info">
         <h5 className="title">{video.title}</h5>
-        <p>좋아요 {video.likeCount}개 • {video.createdAt}</p>
+        <p>좋아요 {video.likeCount}개 • {video.createdDiff}</p>
       </div>
     </div>
   )
