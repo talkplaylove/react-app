@@ -33,7 +33,7 @@ function HomePage() {
             videos.map((video, index) => {
               return (
                 <Col key={index} className="video-col" xs={12} sm={6} md={6} lg={4} xl={3}>
-                  <Link to={`/videos/${video.id}`}>
+                  <Link to={`/videos/${video._id}`}>
                     <Video video={video} />
                   </Link>
                 </Col>
