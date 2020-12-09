@@ -1,5 +1,4 @@
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 
 function HomeMenu() {
   return (
@@ -8,8 +7,8 @@ function HomeMenu() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link><Link to="/">Home</Link></Nav.Link>
-          <Nav.Link><Link to="/videos">Link</Link></Nav.Link>
+          <Nav.Link>Home</Nav.Link>
+          <Nav.Link>Link</Nav.Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

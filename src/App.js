@@ -1,6 +1,6 @@
 import HomePage from './pages/HomePage'
 import VideoPage from './pages/VideoPage'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
