@@ -8,13 +8,18 @@ import HomeMenu from '../components/home/HomeMenu'
 import HomeBanner from '../components/home/HomeBanner'
 import Video from '../components/video/Video'
 
-import data from '../datas/videos.json'
-
 function HomePage() {
-  let [pageable, setPageable] = useState({page: 0, size: 12})
-  let [videos, setVideos] = useState(data)
+  let [videos, setVideos] = useState([])
   useEffect(() => {
-
+    axios.get('http://localhost:8080/videos')
+      .then(result => {
+        if (result.status === 200) {
+          setVideos(result.data)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
 
   return (
