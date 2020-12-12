@@ -1,6 +1,6 @@
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 
-function HomeMenu() {
+function AppMenu() {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand href="#home">YouTube</Navbar.Brand>
@@ -19,4 +19,4 @@ function HomeMenu() {
   )
 }
 
-export default HomeMenu
+export default AppMenu

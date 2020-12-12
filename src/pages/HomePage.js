@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './HomePage.scss'
 
-import HomeMenu from '../components/home/HomeMenu'
 import HomeBanner from '../components/home/HomeBanner'
 import Video from '../components/video/Video'
 
@@ -24,7 +23,6 @@ function HomePage() {
 
   return (
     <>
-      <HomeMenu />
       <HomeBanner />
 
       <Container fluid>
