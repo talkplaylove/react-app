@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import './VideoPage.scss'
+
+import VideoPlayer from '../components/video/VideoPlayer'
+import { Container, Row, Col } from 'react-bootstrap'
 
 function VideoPage() {
   let { id } = useParams()
-  let history = useHistory()
   let [video, setVideo] = useState({})
   useEffect(() => {
-    axios.get(`http://localhost:8080/videos/${id}`)
+    axios.get(`${process.env.REACT_APP_API_URI}/videos/${id}`)
       .then(result => {
-        console.log(result.status)
         if (result.status === 200) {
           setVideo(result.data)
         }
@@ -19,13 +20,17 @@ function VideoPage() {
         console.log(err)
       })
   }, [])
+
   return (
     <>
-      <video controls>
-        <source src="http://localhost:8080/vod/christmas.mp4" type="video/mp4"></source>
-      </video>
-      <Button variant="danger" onClick={() => history.goBack()}>뒤로가기</Button>
-      {JSON.stringify(video)}
+      <Container fluid="md">
+        <Row>
+          <Col lg={9}>
+            <VideoPlayer video={video} />
+          </Col>
+          <Col lg={3}></Col>
+        </Row>
+      </Container>
     </>
   )
 }

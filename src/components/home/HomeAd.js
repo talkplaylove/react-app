@@ -1,6 +1,6 @@
 import { Jumbotron } from 'react-bootstrap'
 
-function HomeBanner() {
+function HomeAd() {
   return (
     <Jumbotron>
       <h1>Advertisement</h1>
@@ -12,4 +12,4 @@ function HomeBanner() {
   )
 }
 
-export default HomeBanner
+export default HomeAd

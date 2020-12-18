@@ -4,35 +4,38 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './HomePage.scss'
 
-import HomeBanner from '../components/home/HomeBanner'
-import Video from '../components/video/Video'
+import HomeAd from '../components/home/HomeAd'
+import VideosElement from '../components/video/VideosElement'
 
 function HomePage() {
   let [videos, setVideos] = useState([])
-  useEffect(() => {
-    axios.get('http://localhost:8080/videos')
+  useEffect(nextVideos, [])
+
+  function nextVideos() {
+    axios.get(`${process.env.REACT_APP_API_URI}/videos`)
       .then(result => {
         if (result.status === 200) {
-          setVideos(result.data)
+          let allVideos = [...videos, ...result.data]
+          setVideos(allVideos)
         }
       })
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }
 
   return (
     <>
-      <HomeBanner />
+      <HomeAd />
 
       <Container fluid>
         <Row>
           {
             videos.map((video, index) => {
               return (
-                <Col key={index} className="video-col" xs={12} sm={6} md={6} lg={4} xl={3}>
+                <Col key={index} className="home-video" xs={12} sm={6} lg={3}>
                   <Link to={`/videos/${video._id}`}>
-                    <Video video={video} />
+                    <VideosElement video={video} />
                   </Link>
                 </Col>
               )
