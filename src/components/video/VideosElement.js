@@ -1,5 +1,4 @@
 import './VideosElement.scss'
-import { displayDate } from '../../utils/DateUtils'
 
 function Video({ video }) {
   return (
@@ -9,7 +8,7 @@ function Video({ video }) {
       </div>
       <div className="info">
         <h5 className="title">{video.title}</h5>
-        <p>좋아요 {video.likeCount}개 • {displayDate(video.createdAt)}</p>
+        <p>좋아요 {video.likes}개 • {video.displayedAt}</p>
       </div>
     </div>
   )

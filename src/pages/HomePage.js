@@ -8,20 +8,31 @@ import HomeAd from '../components/home/HomeAd'
 import VideosElement from '../components/video/VideosElement'
 
 function HomePage() {
+  let [params, setParams] = useState({ page: 0, size: 8 })
   let [videos, setVideos] = useState([])
   useEffect(nextVideos, [])
 
+  window.onscroll = (e) => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      nextVideos()
+    }
+  }
+
   function nextVideos() {
-    axios.get(`${process.env.REACT_APP_API_URI}/videos`)
-      .then(result => {
-        if (result.status === 200) {
-          let allVideos = [...videos, ...result.data]
+    axios.get(`${process.env.REACT_APP_API_URI}/videos`, {
+      params: params
+    }).then(result => {
+      if (result.status === 200) {
+        const nextVideos = result.data
+        if (nextVideos.length > 0) {
+          let allVideos = [...videos, ...nextVideos]
           setVideos(allVideos)
+          setParams(...params.page++)
         }
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   return (
