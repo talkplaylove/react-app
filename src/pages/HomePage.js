@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './HomePage.scss'
 
 import HomeAd from '../components/home/HomeAd'
-import VideosElement from '../components/video/VideosElement'
+import Videos from '../components/video/Videos'
 
 function HomePage() {
   let [params, setParams] = useState({ page: 0, size: 8 })
+  let [finished, isFinished] = useState(false)
   let [videos, setVideos] = useState([])
   useEffect(nextVideos, [])
 
@@ -19,15 +18,19 @@ function HomePage() {
   }
 
   function nextVideos() {
+    if (videos.length > 80) return
+    if (finished) return
+
     axios.get(`${process.env.REACT_APP_API_URI}/videos`, {
       params: params
     }).then(result => {
       if (result.status === 200) {
         const nextVideos = result.data
         if (nextVideos.length > 0) {
-          let allVideos = [...videos, ...nextVideos]
-          setVideos(allVideos)
-          setParams(...params.page++)
+          setVideos([...videos, ...nextVideos])
+          setParams([...params.page++])
+        } else if (nextVideos.length === 0) {
+          isFinished(true)
         }
       }
     }).catch(err => {
@@ -39,21 +42,7 @@ function HomePage() {
     <>
       <HomeAd />
 
-      <Container fluid>
-        <Row>
-          {
-            videos.map((video, index) => {
-              return (
-                <Col key={index} className="home-video" xs={12} sm={6} lg={3}>
-                  <Link to={`/videos/${video._id}`}>
-                    <VideosElement video={video} />
-                  </Link>
-                </Col>
-              )
-            })
-          }
-        </Row>
-      </Container>
+      <Videos videos={videos} />
     </>
   )
 }

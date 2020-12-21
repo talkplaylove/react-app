@@ -1,6 +1,6 @@
 import './VideosElement.scss'
 
-function Video({ video }) {
+function VideosElement({ video }) {
   return (
     <div className="video">
       <div className="thumbnail">
@@ -14,4 +14,4 @@ function Video({ video }) {
   )
 }
 
-export default Video
+export default VideosElement
