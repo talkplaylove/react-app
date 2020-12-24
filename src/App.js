@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import HomePage from './pages/HomePage'
 import VideoPage from './pages/VideoPage'
 import SearchPage from './pages/SearchPage'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import './App.scss'
 
 function App() {
