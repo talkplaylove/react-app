@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import './HomePage.scss'
 
 import HomeAd from '../components/home/HomeAd'
 import Videos from '../components/video/Videos'
+import HomeNav from '../components/home/HomeNav'
 
 function HomePage() {
   let [params, setParams] = useState({ page: 0, size: 8 })
@@ -21,7 +21,7 @@ function HomePage() {
     if (videos.length > 80) return
     if (finished) return
 
-    axios.get(`${process.env.REACT_APP_API_URI}/videos`, {
+    axios.get(`/videos`, {
       params: params
     }).then(result => {
       if (result.status === 200) {
@@ -40,6 +40,7 @@ function HomePage() {
 
   return (
     <>
+      <HomeNav />
       <HomeAd />
 
       <Videos videos={videos} />

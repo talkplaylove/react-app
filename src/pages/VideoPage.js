@@ -5,12 +5,14 @@ import './VideoPage.scss'
 
 import VideoPlayer from '../components/video/VideoPlayer'
 import { Container, Row, Col } from 'react-bootstrap'
+import VideoNav from '../components/video/VideoNav'
 
 function VideoPage() {
   let { id } = useParams()
   let [video, setVideo] = useState({})
+
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URI}/videos/${id}`)
+    axios.get(`/videos/${id}`)
       .then(result => {
         if (result.status === 200) {
           setVideo(result.data)
@@ -19,10 +21,11 @@ function VideoPage() {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [id])
 
   return (
     <>
+      <VideoNav />
       <Container fluid="md">
         <Row>
           <Col lg={9}>
